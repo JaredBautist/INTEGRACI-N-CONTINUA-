@@ -169,7 +169,3 @@ pytest -q && cd frontend && npm test
 
 ---
 
-## 9. Próximos pasos sugeridos
-1. Ejecutar los comandos de cobertura y guardar los artefactos (logs/capturas) en la carpeta `docs/` o subidos al README.
-2. Preparar el video y la presentación ejecutiva con base en los resultados.
-3. Completar las 10 ejecuciones exitosas del pipeline antes de entregar.
