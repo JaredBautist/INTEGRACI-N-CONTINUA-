@@ -133,6 +133,14 @@ Para cumplir con “historial de al menos 10 builds exitosos”:
 
 Sugerencia: crea una sección “Evidencias” al final del README con enlaces a la grabación y la presentación, más capturas de cobertura y de los builds.
 
+### Evidencias (en preparación)
+
+- [ ] Reporte de cobertura backend (`pytest --cov=app --cov-report=term-missing`) adjunto como captura en `docs/`.
+- [ ] Reporte de cobertura frontend (`npm run test:coverage`) adjunto como captura en `docs/`.
+- [ ] Historial GitHub Actions con ≥10 ejecuciones verdes (captura listada en `docs/`).
+- [ ] Enlace al video final de 10 minutos.
+- [ ] Enlace a la presentación ejecutiva (HTML/PDF).
+
 ---
 
 ## 8. Comandos rápidos (resumen)

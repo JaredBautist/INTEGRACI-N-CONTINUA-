@@ -6,84 +6,187 @@
     <title>Presentación Ejecutiva - Proyecto Caso Testigo</title>
     <style>
         :root {
-            --primary: #1d4ed8;
+            --primary: #2563eb;
             --secondary: #0f172a;
             --accent: #fbbf24;
-            --bg: #f5f6fb;
+            --surface: rgba(15, 23, 42, 0.6);
+            --bg: #f1f5f9;
         }
 
         * {
             box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: "Segoe UI", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
             margin: 0;
-            background: var(--bg);
+            min-height: 100vh;
+            background: radial-gradient(circle at top, rgba(37, 99, 235, 0.25), transparent 45%),
+                        radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.2), transparent 35%),
+                        var(--bg);
             color: var(--secondary);
+            padding: 32px 0 48px;
         }
 
         .deck {
-            max-width: 960px;
+            max-width: 1040px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 0 24px;
         }
 
         .slide {
             display: none;
-            background: white;
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 20px 35px rgba(15, 23, 42, 0.12);
-            min-height: 520px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.95));
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 35px 60px rgba(15, 23, 42, 0.2);
+            min-height: 580px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: attr(data-step);
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            font-size: 60px;
+            font-weight: 800;
+            color: rgba(37, 99, 235, 0.08);
+            letter-spacing: 4px;
         }
 
         .slide.active {
             display: block;
-            animation: fade 0.4s ease-in;
+            animation: reveal 0.5s ease;
         }
 
-        h1 {
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        h2 {
+        h1, h2 {
             margin-top: 0;
             color: var(--secondary);
         }
 
-        ul {
-            line-height: 1.6;
-            padding-left: 20px;
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 24px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .highlight {
-            background: rgba(30, 64, 175, 0.07);
+            background: rgba(37, 99, 235, 0.08);
+            border-radius: 16px;
+            padding: 16px 20px;
             border-left: 4px solid var(--primary);
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin: 16px 0;
+            margin: 18px 0;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 18px;
+        }
+
+        .card {
+            border-radius: 18px;
+            padding: 18px;
+            background: white;
+            box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+        }
+
+        ul {
+            line-height: 1.6;
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .kpi {
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .kpi strong {
+            display: block;
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .timeline {
+            margin-top: 16px;
+            border-left: 2px solid rgba(37, 99, 235, 0.2);
+            padding-left: 18px;
+        }
+
+        .timeline article {
+            margin-bottom: 16px;
+        }
+
+        .timeline h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .risk {
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.04);
+            border: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .nav {
-            margin-top: 16px;
+            margin-top: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
         }
 
         button {
             border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         button.primary {
             background: var(--primary);
             color: white;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
         }
 
         button.secondary {
@@ -92,154 +195,302 @@
             border: 1px solid var(--primary);
         }
 
-        .counter {
-            font-weight: bold;
-            color: var(--secondary);
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
         }
 
-        @keyframes fade {
+        .progress-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        @keyframes reveal {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
+        @media (max-width: 720px) {
+            .slide {
+                padding: 28px 20px;
+                min-height: auto;
+            }
+
+            .slide::before {
+                font-size: 40px;
+                top: 12px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="deck">
-        <div class="slide active">
+        <div class="slide active" data-step="01">
             <h1>Proyecto Caso Testigo - CI/CD</h1>
-            <p class="highlight">Integración Continua y despliegue automatizado para un sistema gestor de tareas empresarial.</p>
-            <ul>
-                <li>Curso: Ingeniería de Software FESC</li>
-                <li>Unidad: Integración continua y proyecto final</li>
-                <li>Objetivo: Unir backend, frontend, pruebas y automatización en un solo repositorio.</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Agenda</h2>
-            <ul>
-                <li>Arquitectura general</li>
-                <li>Backend FastAPI y pruebas</li>
-                <li>Frontend React + Redux</li>
-                <li>Pipeline CI/CD</li>
-                <li>Métricas y cobertura</li>
-                <li>Riesgos y aprendizajes</li>
-                <li>Roadmap siguiente iteración</li>
-            </ul>
-        </div>
-
-        <div class="slide">
-            <h2>Arquitectura</h2>
-            <ul>
-                <li>Backend FastAPI sobre Python 3.11, contenedor Docker opcional.</li>
-                <li>Base de datos PostgreSQL gestionada con Docker Compose.</li>
-                <li>SPA React + Redux Toolkit consumiendo API REST.</li>
-                <li>Pipeline GitHub Actions ejecutando pruebas y cobertura.</li>
-            </ul>
-            <div class="highlight">
-                Todo el código convive en un solo repositorio para facilitar CI/CD y documentación.
+            <div class="tag-list">
+                <span class="tag">Ingeniería de Software FESC</span>
+                <span class="tag">Unidad 3</span>
+                <span class="tag">Semestre VI</span>
+            </div>
+            <p class="highlight">
+                Transformamos el gestor de tareas empresarial en un caso práctico que integra backend y frontend profesionales,
+                automatización de pruebas y despliegues continuos con GitHub Actions.
+            </p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Objetivos</h3>
+                    <ul>
+                        <li>Implementar CI/CD end-to-end en un solo repositorio.</li>
+                        <li>Unir competencias de codificación, testing y documentación.</li>
+                        <li>Presentar evidencias completas para la rúbrica institucional.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Stack Clave</h3>
+                    <ul>
+                        <li>FastAPI · PostgreSQL · Docker</li>
+                        <li>React · Redux Toolkit · Vite</li>
+                        <li>Pytest · Vitest · GitHub Actions</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="slide">
+        <div class="slide" data-step="02">
+            <h2>Agenda visual</h2>
+            <div class="timeline">
+                <article>
+                    <h3>Arquitectura y recursos</h3>
+                    <p>Visión 360° del repositorio y dependencias.</p>
+                </article>
+                <article>
+                    <h3>Backend + pruebas</h3>
+                    <p>FastAPI, pytest-cov y Dockerfile.</p>
+                </article>
+                <article>
+                    <h3>Frontend SPA</h3>
+                    <p>React, Redux Toolkit y pruebas con Vitest.</p>
+                </article>
+                <article>
+                    <h3>Pipeline y métricas</h3>
+                    <p>GitHub Actions + KPIs de cobertura y builds.</p>
+                </article>
+                <article>
+                    <h3>Riesgos y roadmap</h3>
+                    <p>Mitigaciones y siguientes iteraciones.</p>
+                </article>
+            </div>
+        </div>
+
+        <div class="slide" data-step="03">
+            <h2>Arquitectura integral</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Backend &amp; Datos</h3>
+                    <ul>
+                        <li>FastAPI sobre Python 3.11.</li>
+                        <li>Persistencia en memoria + conectividad opcional PostgreSQL.</li>
+                        <li>Docker Compose para API + DB compartida.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Frontend &amp; UX</h3>
+                    <ul>
+                        <li>SPA en React/Vite con TypeScript.</li>
+                        <li>Redux Toolkit centraliza estado y efectos.</li>
+                        <li>Axios configurable vía `VITE_API_URL`.</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="highlight">Todo el código convive en un único repositorio, facilitando el versionamiento y la automatización de pruebas.</p>
+        </div>
+
+        <div class="slide" data-step="04">
             <h2>Backend &amp; Testing</h2>
-            <ul>
-                <li>FastAPI con endpoints CRUD (GET, POST, PUT, DELETE).</li>
-                <li>TestClient de Starlette + Pytest para validar flujos felices y errores.</li>
-                <li>pytest-cov asegura cobertura &gt; 80 %.</li>
-                <li>Dockerfile liviano + Compose para levantar API y DB.</li>
-            </ul>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Características</h3>
+                    <ul>
+                        <li>Endpoints CRUD completos (`/tareas`).</li>
+                        <li>Nuevo `/health` para monitoreo.</li>
+                        <li>Dockerfile slim y variables por entorno.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Pruebas</h3>
+                    <ul>
+                        <li>Pytest + TestClient validando flujos felices y 404.</li>
+                        <li>Fixture resetea la base en memoria.</li>
+                        <li>`pytest --cov=app --cov-report=term-missing` &gt; 80 %.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="slide">
+        <div class="slide" data-step="05">
             <h2>Frontend SPA</h2>
-            <ul>
-                <li>Vite + React + TypeScript.</li>
-                <li>Redux Toolkit para estado global de tareas.</li>
-                <li>Axios como cliente HTTP con configuración `VITE_API_URL`.</li>
-                <li>Vitest + Testing Library + cobertura V8.</li>
-            </ul>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Stack</h3>
+                    <ul>
+                        <li>Vite + React 18 + TypeScript.</li>
+                        <li>Redux Toolkit + hooks tipados.</li>
+                        <li>Componentes modulares (Header, Resumen, Form, Lista).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Testing &amp; UX</h3>
+                    <ul>
+                        <li>Vitest + Testing Library + cobertura V8 (`npm run test:coverage`).</li>
+                        <li>Estado sincronizado con la API.</li>
+                        <li>Diseño responsive listo para la demo.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="slide">
+        <div class="slide" data-step="06">
             <h2>Pipeline CI/CD</h2>
+            <p class="highlight">Workflow `CI` en GitHub Actions que instala Python 3.11, levanta el entorno virtual, instala dependencias y ejecuta Pytest automáticamente.</p>
             <ul>
-                <li>Workflow `CI` en GitHub Actions.</li>
-                <li>Instala Python 3.11, dependencias y ejecuta Pytest.</li>
-                <li>PYTHONPATH configurado para importaciones estables.</li>
-                <li>Meta: 10 ejecuciones verdes registradas como evidencia.</li>
+                <li>Variables configuradas para asegurar imports (`PYTHONPATH=${'{'}{'}'} github.workspace {'{'}{'}'}`).</li>
+                <li>Historial esperado: ≥10 builds verdes antes de la entrega.</li>
+                <li>Facilidad para extender con coverage badges o despliegue a staging.</li>
             </ul>
         </div>
 
-        <div class="slide">
-            <h2>Métricas de Calidad</h2>
-            <ul>
-                <li>Cobertura backend: &gt; 80 % (pytest-cov).</li>
-                <li>Cobertura frontend: &gt; 80 % (vitest --coverage).</li>
-                <li>Tiempo promedio de build: &lt; 2 min.</li>
-                <li>Tareas funcionales validadas vía suite automatizada.</li>
-            </ul>
+        <div class="slide" data-step="07">
+            <h2>Métricas de calidad</h2>
+            <div class="kpi-grid">
+                <div class="kpi">
+                    <strong>&gt;80 %</strong>
+                    Cobertura backend (`pytest-cov`).
+                </div>
+                <div class="kpi">
+                    <strong>&gt;80 %</strong>
+                    Cobertura frontend (`vitest --coverage`).
+                </div>
+                <div class="kpi">
+                    <strong>&lt;2 min</strong>
+                    Tiempo promedio por build.
+                </div>
+                <div class="kpi">
+                    <strong>10+</strong>
+                    Builds verdes registrados.
+                </div>
+            </div>
         </div>
 
-        <div class="slide">
-            <h2>Riesgos &amp; Mitigaciones</h2>
-            <ul>
-                <li><strong>Dependencias OS específicas:</strong> Contenedores y requirements fijados.</li>
-                <li><strong>Regresiones en frontend:</strong> Pruebas Vitest + Playwright sugeridas.</li>
-                <li><strong>Cobertura insuficiente:</strong> Scripts dedicados `pytest --cov` / `npm run test:coverage`.</li>
-                <li><strong>Base de datos:</strong> Configuración Docker Compose reproducible.</li>
-            </ul>
+        <div class="slide" data-step="08">
+            <h2>Riesgos &amp; mitigaciones</h2>
+            <div class="risk-grid">
+                <div class="risk">
+                    <strong>Dependencias</strong>
+                    <p>Versiones fijadas y uso de contenedores para ambientes reproducibles.</p>
+                </div>
+                <div class="risk">
+                    <strong>Regresiones UI</strong>
+                    <p>Suite de Vitest y recomendación de Playwright E2E.</p>
+                </div>
+                <div class="risk">
+                    <strong>Cobertura</strong>
+                    <p>Scripts dedicados (`pytest --cov`, `npm run test:coverage`).</p>
+                </div>
+                <div class="risk">
+                    <strong>Base de datos</strong>
+                    <p>Docker Compose estandariza credenciales y puertos.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="slide">
-            <h2>Roadmap Próxima Iteración</h2>
+        <div class="slide" data-step="09">
+            <h2>Roadmap próxima iteración</h2>
             <ul>
                 <li>Persistencia real en PostgreSQL usando SQLAlchemy ORM.</li>
-                <li>Pruebas E2E con Playwright y datos seed.</li>
-                <li>Despliegue automatizado a ambiente de staging (Render/Fly.io).</li>
-                <li>Monitoreo de métricas (coverage badge, Sonar o Codecov).</li>
+                <li>Pruebas E2E con Playwright y datos sembrados.</li>
+                <li>Despliegue automatizado a un entorno cloud (Render/Fly.io).</li>
+                <li>Monitoreo de métricas (coverage badge, Codecov/SonarQube).</li>
             </ul>
         </div>
 
-        <div class="slide">
+        <div class="slide" data-step="10">
             <h2>Cierre</h2>
-            <div class="highlight">
-                El proyecto demuestra la integración de todas las competencias del curso: codificación disciplinada, pruebas exhaustivas y automatización CI/CD.
-            </div>
+            <p class="highlight">El proyecto integra todas las competencias del curso: codificación disciplinada, pruebas exhaustivas y automatización CI/CD completamente documentada.</p>
             <ul>
-                <li>Repositorio documentado y reproducible.</li>
-                <li>Pipeline automatizado en GitHub Actions.</li>
-                <li>Frontend y backend listos para demo en video.</li>
+                <li>Repositorio autónomo con backend, frontend, Docker y CI.</li>
+                <li>Guion + slides listos para la demo en video.</li>
+                <li>Evidencias alineadas con la rúbrica institucional.</li>
             </ul>
         </div>
 
         <div class="nav">
             <button class="secondary" id="prev">Anterior</button>
-            <span class="counter" id="counter">1 / 10</span>
+            <div class="progress-dots" id="dots"></div>
             <button class="primary" id="next">Siguiente</button>
         </div>
     </div>
 
     <script>
-        const slides = document.querySelectorAll(".slide");
-        const counter = document.getElementById("counter");
-        let current = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const dotsContainer = document.getElementById('dots');
+        let currentSlideIndex = 0;
 
-        function updateSlide(index) {
-            slides[current].classList.remove("active");
-            current = (index + slides.length) % slides.length;
-            slides[current].classList.add("active");
-            counter.textContent = `${current + 1} / ${slides.length}`;
+        slides.forEach((_slide, index) => {
+            const span = document.createElement('span');
+            span.classList.add('dot');
+            if (index === 0) span.classList.add('active');
+            dotsContainer.appendChild(span);
+        });
+        const dots = dotsContainer.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            document.getElementById('prev').disabled = index === 0;
+            document.getElementById('next').disabled = index === totalSlides - 1;
         }
 
-        document.getElementById("prev").addEventListener("click", () => updateSlide(current - 1));
-        document.getElementById("next").addEventListener("click", () => updateSlide(current + 1));
+        function changeSlide(direction) {
+            const newIndex = currentSlideIndex + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlideIndex = newIndex;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        document.getElementById('prev').addEventListener('click', () => changeSlide(-1));
+        document.getElementById('next').addEventListener('click', () => changeSlide(1));
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+            if (event.key === 'ArrowRight') changeSlide(1);
+        });
     </script>
 </body>
 </html>
