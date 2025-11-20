@@ -19,6 +19,11 @@ def test_listado_inicial_vacio():
     assert resp.status_code == 200
     assert resp.json() == []
 
+def test_health_check_reporta_conteo():
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    assert resp.json() == {"status": "ok", "total_tareas": 0}
+
 
 def test_crear_y_listar_tareas():
     payload = {"titulo": "Reunión", "descripcion": "Planificar Q2"}

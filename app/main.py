@@ -19,6 +19,12 @@ class Tarea(BaseModel):
 db: List[Tarea] = []
 
 
+@app.get("/health")
+def health_check() -> dict:
+    """Endpoint simple para monitoreo del backend."""
+    return {"status": "ok", "total_tareas": len(db)}
+
+
 @app.get("/tareas", response_model=List[Tarea])
 def listar_tareas() -> List[Tarea]:
     """Devuelve todas las tareas almacenadas en memoria."""
