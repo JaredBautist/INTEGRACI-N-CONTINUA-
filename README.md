@@ -120,30 +120,10 @@ Para cumplir con “historial de al menos 10 builds exitosos”:
 
 ---
 
-## 7. Entregables de la rúbrica
-
-| Entregable | Estado / cómo cumplir |
-| --- | --- |
-| Repositorio GitHub con código documentado | ✅ Este repo contiene backend, frontend, Docker, CI. Mantén actualizado el README y comentarios clave. |
-| Pipeline CI/CD (≥10 builds verdes) | ⚙️ Sigue empujando commits menores hasta acumular mínimo 10 ejecuciones exitosas en GitHub Actions. |
-| Suite de pruebas con cobertura >80 % | ⚙️ Ejecuta `pytest --cov=app` y `npm run test:coverage`, adjunta reporte/capturas. Añade pruebas adicionales si el porcentaje cae. |
-| Documentación técnica en README | ✅ Secciones 1–6 documentan arquitectura, instalación, pruebas y CI. Agrega detalles específicos de tu entorno si cambias algo. |
-| Video demostración (10 min) | ⚙️ Graba con OBS/Zoom mostrando: 1) API y pruebas, 2) Frontend, 3) Docker, 4) Pipeline en GitHub Actions. Comparte enlace en el README o plataforma. |
-| Presentación ejecutiva (10 slides) | ⚙️ Prepara deck con: objetivos, arquitectura, pipeline, métricas (cobertura, builds), riesgos y lecciones aprendidas. Incluye enlace/referencia aquí cuando lo tengas. |
-
-Sugerencia: crea una sección “Evidencias” al final del README con enlaces a la grabación y la presentación, más capturas de cobertura y de los builds.
-
-### Evidencias (en preparación)
-
-- [ ] Reporte de cobertura backend (`pytest --cov=app --cov-report=term-missing`) adjunto como captura en `docs/`.
-- [ ] Reporte de cobertura frontend (`npm run test:coverage`) adjunto como captura en `docs/`.
-- [ ] Historial GitHub Actions con ≥10 ejecuciones verdes (captura listada en `docs/`).
-- [ ] Enlace al video final de 10 minutos.
-- [ ] Enlace a la presentación ejecutiva (HTML/PDF).
 
 ---
 
-## 8. Comandos rápidos (resumen)
+## 7. Comandos rápidos (resumen)
 
 ```bash
 # Backend
